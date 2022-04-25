@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title></title>
+    <style type="text/css">
+        .item {
+            width: 150px;
+            height: 150px;
+            background-size:100%;
+            background-repeat: no-repeat;
+            margin-top: 40px;
+            margin-left: 40px;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            height: 200px;
+            width: 800px;
+        }
+        .active{
+            border: 5px solid green;
+        }
+        .timer{
+            margin-top: 450px;
+        }
+    </style>
+</head>
+<body style="background-image: url(bg3.jpg); background-size:100%; background-repeat: no-repeat;">
+    <div class="mx-auto col-3 mt-5">
+        <h2 class="text-center mt-4 mb-4">Найдите пары!</h2>
+        <button class="btn1 col-12 btn btn-light">Начать!</button>
+    </div>
+    <div class="mx-auto col-3 mt-4">
+        
+    </div>
+    <div class="row mt-5 mx-auto">
+    </div>
+    <h2 class="text-center timer">Время: <span class="time">0</span></h2>
+    <script type="text/javascript">
+    //див-родитель
+    let row = document.querySelector(".row");
+    let time = document.querySelector(".time");
+    let btn1 = document.querySelector(".btn1");
+    let randomizer = function(arg){
+        let random = Math.random()*arg;
+        let round = Math.round(random);
+        return round;
+    }
+    //хранение 12ти картинок
+    let images = ["1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif", "1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif"];
+    let checker = 0;
+    let score = 0;
+    let seconds = 0;
+    time.innerHTML = seconds
+    let ischesator = function(arg){
+        document.querySelectorAll(arg)[0].style.opacity = '0'
+        document.querySelectorAll(arg)[1].style.opacity = '0'
+    }
+    btn1.onclick = function(){
+        seconds = 6;
+        time.innerHTML = seconds
+        let secundamer = function(){
+            seconds = seconds - 1;
+            time.innerHTML = seconds
+        }
+        let interval = setInterval(secundamer, 1000);
+        interval;
+        let enderofgame = function(){
+            clearInterval(interval)
+            if (score == 6) {
+                alert("Молодец, ты выйграл!")
+            }
+            else {
+                alert("Ты проиграл!  Попытайся снова ;)")
+            }
+        }
+        setTimeout(enderofgame,6000);
+    }
+    for(let i=0;i<12;i=i+1){
+
+        let random = randomizer(images.length-1);//1 способ 11-i
+        //2 способ images.length-1
+
+        let box = document.createElement("div");
+        row.appendChild(box);
+        box.classList.add("item")
+        box.style.backgroundImage = "url(" + images[random] + ")"
+        box.name = images[random]
+        images.splice(random,1)
+        box.onclick =function() {
+            if (box.name == '1.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box1")
+                if (checker == 2) {
+                    ischesator('.box1');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            if (box.name == '2.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box2")
+                if (checker == 2) {
+                    ischesator('.box2');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            if (box.name == '3.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box3")
+                if (checker == 2) {
+                    ischesator('.box3');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            if (box.name == '4.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box4")
+                if (checker == 2) {
+                    ischesator('.box4');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            if (box.name == '5.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box5")
+                if (checker == 2) {
+                    ischesator('.box5');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            if (box.name == '6.gif') {
+                checker = checker + 1
+                console.log(checker)
+                box.classList.add("active")
+                box.classList.add("box6")
+                if (checker == 2) {
+                    ischesator('.box6');
+                    checker = 0
+                    score = score + 1
+                }
+            }
+            
+        }
+    }
+    </script>
+</body>
+</html>
